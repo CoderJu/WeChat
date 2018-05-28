@@ -2,8 +2,10 @@ package com.wechat.controller.base;
 
 import com.wechat.Util.WeChatUtil;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +20,11 @@ import java.io.PrintWriter;
 @RequestMapping("/base")
 public class WeChatBaseController {
 
+    private static Logger logger = Logger.getLogger(WeChatBaseController.class);
     /**
      * 确认请求来自微信服务器
      */
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get",method = RequestMethod.GET)
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 
@@ -54,29 +57,14 @@ public class WeChatBaseController {
     /**
      * 处理微信服务器发来的消息
      */
-    @RequestMapping("/post")
+    @RequestMapping(value = "/post",method = RequestMethod.POST)
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         // TODO 消息的接收、处理、响应
-        System.out.println("接口调用了一次");
+        logger.info("接口调用了一次");
 
         String ret = IOUtils.toString(request.getInputStream(), "utf-8").toString();
-        System.out.println("======"+ret);
-
-       // WeChatMsgBL tWeChatMsgBL = new WeChatMsgBL();
-       // String result = tWeChatMsgBL.dealWechatMsg(ret);
-
-        response.setCharacterEncoding("UTF-8");
-
-        // 返回文本消息，将处理结果返回
-        PrintWriter out = response.getWriter();
-
-        //System.out.println(result);
-
-        //out.print(result);
-
-        out.close();
-
+        logger.info("======"+ret);
     }
 
 }
