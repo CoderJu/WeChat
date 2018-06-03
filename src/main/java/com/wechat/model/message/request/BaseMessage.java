@@ -1,16 +1,19 @@
-package com.wechat.model.base;
+package com.wechat.model.message.request;
 
 /**
- * Created by User on 2018/5/28.
+ * Created by User on 2018/5/31.
  */
-public class Message {
-
+public class BaseMessage {
+    //开发者微信号
     private String ToUserName;
+    //发送方帐号（一个OpenID）
     private String FromUserName;
+    //消息创建时间 （整型）
     private String CreateTime;
+    //消息类型（text/image/location/link）
     private String MsgType;
-    private String MediaId;
-
+    //消息id，64位整型
+    private String MsgId;
 
     public String getToUserName() {
         return ToUserName;
@@ -44,22 +47,11 @@ public class Message {
         MsgType = msgType;
     }
 
-    public String getMediaId() {
-        return MediaId;
+    public String getMsgId() {
+        return MsgId;
     }
 
-    public void setMediaId(String mediaId) {
-        MediaId = mediaId;
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "ToUserName='" + ToUserName + '\'' +
-                ", FromUserName='" + FromUserName + '\'' +
-                ", CreateTime='" + CreateTime + '\'' +
-                ", MsgType='" + MsgType + '\'' +
-                ", MediaId='" + MediaId + '\'' +
-                '}';
+    public void setMsgId(String msgId) {
+        MsgId = msgId;
     }
 }

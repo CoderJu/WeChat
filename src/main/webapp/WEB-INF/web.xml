@@ -43,8 +43,21 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+  <servlet>
+    <servlet-name>initServlet</servlet-name>
+    <servlet-class>com.wechat.token.InitServlet</servlet-class>
+    <!-- 配置获取access_token所需参数appid和appsecret -->
+    <init-param>
+      <param-name>appid</param-name>
+      <param-value>wxaa8cddebe617c505</param-value>
+    </init-param>
+    <init-param>
+      <param-name>appsecret</param-name>
+      <param-value>b58794d9e5614571609b4a8aeb38ac95</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+
+
 
 </web-app>
