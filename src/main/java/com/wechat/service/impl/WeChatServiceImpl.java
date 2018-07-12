@@ -1,15 +1,22 @@
 package com.wechat.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.wechat.Util.CommonUtil;
 import com.wechat.Util.MessageUtil;
+import com.wechat.Util.Util;
+import com.wechat.mapper.WeChatUserInfoMapper;
 import com.wechat.model.message.response.TextRespMessage;
 import com.wechat.model.user.WeChatUserInfo;
 import com.wechat.service.WeChatService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -22,10 +29,14 @@ import java.util.Map;
  * 版本：V1.0
  */
 
+@Transactional
 @Service("weChatService")
 public class WeChatServiceImpl implements WeChatService {
 
     private static Logger logger = Logger.getLogger(WeChatServiceImpl.class);
+
+    @Autowired
+    private WeChatUserInfoMapper weChatUserInfoMapper;
 
     /**
      * 处理微信发来的请求
@@ -57,6 +68,9 @@ public class WeChatServiceImpl implements WeChatService {
             textMessage.setFromUserName(toUserName);
             textMessage.setCreateTime(new Date().getTime());
             textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
+
+            WeChatUserInfo weChatUserInfo =  getUserInfo(accessToken, fromUserName);
+            logger.info("weChatUserInfo:"+weChatUserInfo);
 
             // 文本消息
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
@@ -92,13 +106,14 @@ public class WeChatServiceImpl implements WeChatService {
                 String eventType = requestMap.get("Event");
                 // 关注
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    getUserInfo(accessToken, fromUserName);
+                    createWeChatUserInfo(weChatUserInfo);
                     respContent = "谢谢您的关注！";
                 }
                 // 取消关注
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
                     // TODO 取消订阅后用户不会再收到公众账号发送的消息，因此不需要回复
-                    logger.info("++++++用户取消订阅");
+                    logger.info("++++++用户取消订阅||"+accessToken+"||fromUserName:"+fromUserName);
+                    unSubscribe(weChatUserInfo);
                 }
                 // 扫描带参数二维码
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_SCAN)) {
@@ -153,7 +168,8 @@ public class WeChatServiceImpl implements WeChatService {
              weChatUserInfo.setUnionid(jsonObject.getString("unionid"));
              weChatUserInfo.setRemark(jsonObject.getString("remark"));
              weChatUserInfo.setGroupid(jsonObject.getString("groupid"));
-             weChatUserInfo.setTagid_list(jsonObject.getString("tagid_list"));
+             JSONArray jsonArray = JSONArray.parseArray(jsonObject.getString("tagid_list"));
+             weChatUserInfo.setTagid_list(JSON.parseArray(jsonArray.toJSONString(), String.class));
              weChatUserInfo.setSubscribe_scene(jsonObject.getString("subscribe_scene"));
              weChatUserInfo.setQr_scene(jsonObject.getString("qr_scene"));
              weChatUserInfo.setQr_scene_str(jsonObject.getString("qr_scene_str"));
@@ -171,5 +187,40 @@ public class WeChatServiceImpl implements WeChatService {
         logger.info(">>>>>>>>>>>>>>>>weChatUserInfo"+weChatUserInfo);
         return weChatUserInfo;
     }
+
+    /**
+     * 关注时将关注用户信息写入数据库
+     * @param weChatUserInfo
+     */
+    @Override
+    public void createWeChatUserInfo(WeChatUserInfo weChatUserInfo) {
+        WeChatUserInfo weChatUserInfo_temp = weChatUserInfoMapper.selectByOpenId(weChatUserInfo);
+        logger.info("weChatUserInfo_temp>>>>>"+weChatUserInfo_temp);
+        if (weChatUserInfo_temp == null){//首次关注直接插入数据
+            weChatUserInfo.setCreatedate(Util.getCurrentDate());
+            weChatUserInfo.setCreatetime(Util.getCurrentTime());
+            weChatUserInfo.setLastoperatedate(Util.getCurrentDate());
+            weChatUserInfo.setLastoperatetime(Util.getCurrentTime());
+            weChatUserInfoMapper.insert(weChatUserInfo);
+        }else{//二次关注,更新数据库基础信息字段
+            weChatUserInfo.setLastoperatedate(Util.getCurrentDate());
+            weChatUserInfo.setLastoperatetime(Util.getCurrentTime());
+            weChatUserInfo.setSubscribe("1");
+            weChatUserInfoMapper.updateByOpenId(weChatUserInfo);
+        }
+
+    }
+
+    @Override
+    public void unSubscribe(WeChatUserInfo weChatUserInfo) {
+        weChatUserInfo.setLastoperatedate(Util.getCurrentDate());
+        weChatUserInfo.setLastoperatetime(Util.getCurrentTime());
+        weChatUserInfo.setUnsubscribedate(Util.getCurrentDate());
+        weChatUserInfo.setUnsubscribetime(Util.getCurrentTime());
+        weChatUserInfo.setSubscribe("0");
+        weChatUserInfoMapper.unSubscribe(weChatUserInfo);
+    }
+
+
 }
 

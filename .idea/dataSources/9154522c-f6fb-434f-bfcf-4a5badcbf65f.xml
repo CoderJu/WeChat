@@ -10,68 +10,355 @@
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
     <schema id="6" parent="1" name="sys"/>
-    <table id="7" parent="2" name="user"/>
-    <column id="8" parent="7" name="id">
+    <table id="7" parent="2" name="privilege">
+      <Comment>特权信息表</Comment>
+    </table>
+    <table id="8" parent="2" name="snsuser">
+      <Comment>用户通过微信授权表</Comment>
+    </table>
+    <table id="9" parent="2" name="tag">
+      <Comment>用户被打上的标签明细表</Comment>
+    </table>
+    <table id="10" parent="2" name="user"/>
+    <table id="11" parent="2" name="wechatuser"/>
+    <column id="12" parent="7" name="id">
+      <Position>1</Position>
+      <Comment>用户特权信息表id</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="13" parent="7" name="snsuserid">
+      <Position>2</Position>
+      <Comment>网页授权用户id</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="7" name="privilege">
+      <Position>3</Position>
+      <Comment>特权信息</Comment>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="15" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="16" parent="8" name="id">
+      <Position>1</Position>
+      <Comment>网页授权主键(自增长)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="17" parent="8" name="openid">
+      <Position>2</Position>
+      <Comment>用户的唯一标识</Comment>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="8" name="nickname">
+      <Position>3</Position>
+      <Comment>用户昵称</Comment>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="8" name="sex">
+      <Position>4</Position>
+      <Comment>用户的性别，值为1时是男性，值为2时是女性，值为0时是未知</Comment>
+      <DataType>varchar(5)|0</DataType>
+    </column>
+    <column id="20" parent="8" name="country">
+      <Position>5</Position>
+      <Comment>用户个人资料填写的国家</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="21" parent="8" name="province">
+      <Position>6</Position>
+      <Comment>普通用户个人资料填写的省份</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="22" parent="8" name="city">
+      <Position>7</Position>
+      <Comment>普通用户个人资料填写的城市</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="23" parent="8" name="headimgurl">
+      <Position>8</Position>
+      <Comment>用户头像</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="24" parent="8" name="privilegeid">
+      <Position>9</Position>
+      <Comment>用户特权信息表id</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="25" parent="8" name="unionid">
+      <Position>10</Position>
+      <Comment>只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="26" parent="8" name="createdate">
+      <Position>11</Position>
+      <Comment>创建日期</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="27" parent="8" name="createtime">
+      <Position>12</Position>
+      <Comment>创建时间</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="28" parent="8" name="lastoperatedate">
+      <Position>13</Position>
+      <Comment>最后操作日期</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="29" parent="8" name="lastoperatetime">
+      <Position>14</Position>
+      <Comment>最后操作日期</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="30" parent="8" name="lastname">
+      <Position>15</Position>
+      <Comment>用户姓名</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="31" parent="8" name="telephone">
+      <Position>16</Position>
+      <Comment>用户手机号码</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="32" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="33" parent="9" name="id">
+      <Position>1</Position>
+      <Comment>用户被打上的标签明细表</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="34" parent="9" name="wechatuserid">
+      <Position>2</Position>
+      <Comment>关注用户信息表id</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="9" name="tag">
+      <Position>3</Position>
+      <Comment>标签ID</Comment>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="36" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="10" name="id">
       <Position>1</Position>
       <Comment>用户ID</Comment>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="9" parent="7" name="email">
+    <column id="38" parent="10" name="email">
       <Position>2</Position>
       <Comment>用户邮箱</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="10" parent="7" name="password">
+    <column id="39" parent="10" name="password">
       <Position>3</Position>
       <Comment>用户密码</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="11" parent="7" name="username">
+    <column id="40" parent="10" name="username">
       <Position>4</Position>
       <Comment>用户昵称</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="12" parent="7" name="role">
+    <column id="41" parent="10" name="role">
       <Position>5</Position>
       <Comment>用户身份</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="7" name="status">
+    <column id="42" parent="10" name="status">
       <Position>6</Position>
       <Comment>用户状态</Comment>
       <DataType>int(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="7" name="regTime">
+    <column id="43" parent="10" name="regTime">
       <Position>7</Position>
       <Comment>注册时间</Comment>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="7" name="regIp">
+    <column id="44" parent="10" name="regIp">
       <Position>8</Position>
       <Comment>注册IP</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="16" parent="7" name="email">
+    <index id="45" parent="10" name="email">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="17" parent="7" name="PRIMARY">
+    <key id="46" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="18" parent="7" name="email">
+    <key id="47" parent="10" name="email">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email</UnderlyingIndexName>
+    </key>
+    <column id="48" parent="11" name="id">
+      <Position>1</Position>
+      <Comment>关注用户主键(自增长)</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="49" parent="11" name="subscribe">
+      <Position>2</Position>
+      <Comment>用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。</Comment>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="11" name="openid">
+      <Position>3</Position>
+      <Comment>用户的唯一标识</Comment>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="11" name="nickname">
+      <Position>4</Position>
+      <Comment>用户昵称</Comment>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="11" name="sex">
+      <Position>5</Position>
+      <Comment>用户的性别，值为1时是男性，值为2时是女性，值为0时是未知</Comment>
+      <DataType>varchar(5)|0</DataType>
+    </column>
+    <column id="53" parent="11" name="country">
+      <Position>6</Position>
+      <Comment>用户个人资料填写的国家</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="54" parent="11" name="province">
+      <Position>7</Position>
+      <Comment>普通用户个人资料填写的省份</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="55" parent="11" name="city">
+      <Position>8</Position>
+      <Comment>普通用户个人资料填写的城市</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="56" parent="11" name="language">
+      <Position>9</Position>
+      <Comment>用户的语言，简体中文为zh_CN</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="57" parent="11" name="headimgurl">
+      <Position>10</Position>
+      <Comment>用户头像</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="58" parent="11" name="subscribe_time">
+      <Position>11</Position>
+      <Comment>用户关注时间，为时间戳。如果用户曾多次关注，则取最后关注时间</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="59" parent="11" name="unionid">
+      <Position>12</Position>
+      <Comment>只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。</Comment>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="60" parent="11" name="remark">
+      <Position>13</Position>
+      <Comment>公众号运营者对粉丝的备注，公众号运营者可在微信公众平台用户管理界面对粉丝添加备注</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="61" parent="11" name="groupid">
+      <Position>14</Position>
+      <Comment>用户所在的分组ID（兼容旧的用户分组接口）</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="62" parent="11" name="tagid">
+      <Position>15</Position>
+      <Comment>用户被打上的标签ID列表</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="63" parent="11" name="subscribe_scene">
+      <Position>16</Position>
+      <Comment>返回用户关注的渠道来源，ADD_SCENE_SEARCH 公众号搜索，ADD_SCENE_ACCOUNT_MIGRATION 公众号迁移，ADD_SCENE_PROFILE_CARD 名片分享，ADD_SCENE_QR_CODE 扫描二维码，ADD_SCENEPROFILE LINK 图文页内名称点击，ADD_SCENE_PROFILE_ITEM 图文页右上角菜单，ADD_SCENE_PAID 支付后关注，ADD_SCENE_OTHERS 其他</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="64" parent="11" name="qr_scene">
+      <Position>17</Position>
+      <Comment>二维码扫码场景（开发者自定义）</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="65" parent="11" name="qr_scene_str">
+      <Position>18</Position>
+      <Comment>二维码扫码场景（开发者自定义）</Comment>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="66" parent="11" name="createdate">
+      <Position>19</Position>
+      <Comment>创建日期</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="67" parent="11" name="createtime">
+      <Position>20</Position>
+      <Comment>创建时间</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="68" parent="11" name="lastname">
+      <Position>21</Position>
+      <Comment>用户姓名</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="69" parent="11" name="telephone">
+      <Position>22</Position>
+      <Comment>用户手机号码</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="70" parent="11" name="unsubscribedate">
+      <Position>23</Position>
+      <Comment>取消关注日期</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="71" parent="11" name="unsubscribetime">
+      <Position>24</Position>
+      <Comment>取消关注时间</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="72" parent="11" name="lastoperatedate">
+      <Position>25</Position>
+      <Comment>上次操作日期</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="73" parent="11" name="lastoperatetime">
+      <Position>26</Position>
+      <Comment>上次操作时间</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="74" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>

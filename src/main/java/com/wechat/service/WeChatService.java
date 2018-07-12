@@ -14,7 +14,31 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface WeChatService {
 
+     /**
+      * 处理微信发来的请求
+      * @param request
+      * @param accessToken
+      * @return
+      */
      String processRequest(HttpServletRequest request,String accessToken);
 
+     /**
+      * 获取用户信息
+      * @param accessToken
+      * @param openId
+      * @return
+      */
      WeChatUserInfo getUserInfo(String accessToken, String openId);
+
+     /**
+      * 关注时将关注用户信息写入数据库
+      * @param weChatUserInfo
+      */
+     void createWeChatUserInfo(WeChatUserInfo weChatUserInfo);
+
+     /**
+      * 取消关注时改写数据库状态
+      * @param weChatUserInfo
+      */
+     void unSubscribe(WeChatUserInfo weChatUserInfo);
 }

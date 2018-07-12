@@ -1,5 +1,7 @@
 package com.wechat.model.user;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * 类名：WeChatUserInfo
@@ -37,7 +39,7 @@ public class WeChatUserInfo {
     //用户所在的分组ID（兼容旧的用户分组接口）
     private String groupid;
     //用户被打上的标签ID列表
-    private String tagid_list;
+    private List tagid_list;
     //返回用户关注的渠道来源，ADD_SCENE_SEARCH 公众号搜索，
     // ADD_SCENE_ACCOUNT_MIGRATION 公众号迁移，
     // ADD_SCENE_PROFILE_CARD 名片分享，
@@ -51,6 +53,22 @@ public class WeChatUserInfo {
     private String qr_scene;
     //二维码扫码场景描述（开发者自定义）
     private String qr_scene_str;
+    //创建日期
+    private String createdate;
+    //创建时间
+    private String createtime;
+    //姓名
+    private String lastname;
+    //电话
+    private String telephone;
+    //上次操作日期
+    private String lastoperatedate;
+    //上次操作时间
+    private String lastoperatetime;
+    //取消关注
+    private String unsubscribedate;
+    //取消关注时间
+    private String unsubscribetime;
 
     public String getSubscribe() {
         return subscribe;
@@ -156,11 +174,11 @@ public class WeChatUserInfo {
         this.groupid = groupid;
     }
 
-    public String getTagid_list() {
+    public List getTagid_list() {
         return tagid_list;
     }
 
-    public void setTagid_list(String tagid_list) {
+    public void setTagid_list(List tagid_list) {
         this.tagid_list = tagid_list;
     }
 
@@ -188,5 +206,96 @@ public class WeChatUserInfo {
         this.qr_scene_str = qr_scene_str;
     }
 
+    public String getCreatedate() {
+        return createdate;
+    }
 
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getLastoperatedate() {
+        return lastoperatedate;
+    }
+
+    public void setLastoperatedate(String lastoperatedate) {
+        this.lastoperatedate = lastoperatedate;
+    }
+
+    public String getLastoperatetime() {
+        return lastoperatetime;
+    }
+
+    public void setLastoperatetime(String lastoperatetime) {
+        this.lastoperatetime = lastoperatetime;
+    }
+
+    public String getUnsubscribedate() {
+        return unsubscribedate;
+    }
+
+    public void setUnsubscribedate(String unsubscribedate) {
+        this.unsubscribedate = unsubscribedate;
+    }
+
+    public String getUnsubscribetime() {
+        return unsubscribetime;
+    }
+
+    public void setUnsubscribetime(String unsubscribetime) {
+        this.unsubscribetime = unsubscribetime;
+    }
+
+    @Override
+    public String toString() {
+        return "WeChatUserInfo{" +
+                "subscribe='" + subscribe + '\'' +
+                ", openid='" + openid + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", province='" + province + '\'' +
+                ", language='" + language + '\'' +
+                ", headimgurl='" + headimgurl + '\'' +
+                ", subscribe_time='" + subscribe_time + '\'' +
+                ", unionid='" + unionid + '\'' +
+                ", remark='" + remark + '\'' +
+                ", groupid='" + groupid + '\'' +
+                ", tagid_list=" + tagid_list +
+                ", subscribe_scene='" + subscribe_scene + '\'' +
+                ", qr_scene='" + qr_scene + '\'' +
+                ", qr_scene_str='" + qr_scene_str + '\'' +
+                ", createdate='" + createdate + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", lastoperatedate='" + lastoperatedate + '\'' +
+                ", lastoperatetime='" + lastoperatetime + '\'' +
+                '}';
+    }
 }

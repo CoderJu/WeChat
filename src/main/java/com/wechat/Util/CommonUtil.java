@@ -177,6 +177,7 @@ public class CommonUtil {
      */
     public static void main(String[] args) {
         String source="http://www.coderju.cn/WeChat/oauth";
+        source = "http://wechat.tunnel.qydev.com/oauth";
         System.out.println(CommonUtil.urlEncodeUTF8(source));
     }
 }

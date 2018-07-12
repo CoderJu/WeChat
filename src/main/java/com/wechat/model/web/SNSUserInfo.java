@@ -30,6 +30,18 @@ public class SNSUserInfo {
     private List<String> privilegeList;
     //只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。
     private String unionid;
+    //创建日期
+    private String createdate;
+    //创建时间
+    private String createtime;
+    //姓名
+    private String lastname;
+    //电话
+    private String telephone;
+    //上次操作日期
+    private String lastoperatedate;
+    //上次操作时间
+    private String lastoperatetime;
 
     public String getOpenid() {
         return openid;
@@ -103,6 +115,54 @@ public class SNSUserInfo {
         this.unionid = unionid;
     }
 
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getLastoperatedate() {
+        return lastoperatedate;
+    }
+
+    public void setLastoperatedate(String lastoperatedate) {
+        this.lastoperatedate = lastoperatedate;
+    }
+
+    public String getLastoperatetime() {
+        return lastoperatetime;
+    }
+
+    public void setLastoperatetime(String lastoperatetime) {
+        this.lastoperatetime = lastoperatetime;
+    }
+
     @Override
     public String toString() {
         return "SNSUserInfo{" +
@@ -115,6 +175,12 @@ public class SNSUserInfo {
                 ", headimgurl='" + headimgurl + '\'' +
                 ", privilegeList=" + privilegeList +
                 ", unionid='" + unionid + '\'' +
+                ", createdate='" + createdate + '\'' +
+                ", createtime='" + createtime + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", lastoperatedate='" + lastoperatedate + '\'' +
+                ", lastoperatetime='" + lastoperatetime + '\'' +
                 '}';
     }
 }

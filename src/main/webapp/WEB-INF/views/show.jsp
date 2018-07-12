@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.wechat.model.web.SNSUserInfo,java.lang.*"%>
+<link rel="stylesheet" href="weui/css/weui.min.css">
+<script type="text/javascript" src="weui/js/weui.min.js"></script>
 <html>
 <head>
     <title>OAuth2.0网页授权</title>
@@ -41,5 +43,20 @@
     else
         out.print("用户不同意授权,未获取到用户信息！");
 %>
+<a href="javascript:;" class="weui-btn weui-btn-disabled weui-btn_primary">按钮</a>
+<a href="javascript:;" class="weui-btn weui-btn_warn">确认</a>
+<a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_warn">确认</a>
+<a href="javascript:;" class="weui-btn weui-btn_default">按钮</a>
+<a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_default">按钮</a>
+<div class="button-sp-area">
+    <a href="javascript:;" class="weui-btn weui-btn-plain_default">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn-plain_primary">按钮</a>
+
+    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
+</div>
 </body>
+<script type="text/javascript">
+    weui.alert('alert');
+</script>
 </html>

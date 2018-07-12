@@ -53,7 +53,10 @@ public class MenuManager {
         CommonButton btn11 = new CommonButton();
         btn11.setName("图书目录");
         btn11.setType("view");
-        btn11.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa8cddebe617c505&redirect_uri=http%3A%2F%2Fwww.coderju.cn%2FWeChat%2Foauth&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+        //btn11.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa8cddebe617c505&" +
+              //  "redirect_uri=http%3A%2F%2Fwww.coderju.cn%2FWeChat%2Foauth&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+        btn11.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa8cddebe617c505&" +
+          "redirect_uri=http%3A%2F%2Fwechat.tunnel.qydev.com%2Foauth&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
 
         CommonButton btn12 = new CommonButton();
         btn12.setName("我要借书");
@@ -64,7 +67,7 @@ public class MenuManager {
         CommonButton btn13 = new CommonButton();
         btn13.setName("我要还书");
         btn13.setType("view");
-        btn13.setUrl("http://www.coderju.com/WeChat");
+        btn13.setUrl("http://wechat.tunnel.qydev.com");
 
 
        /* CommonButton btn14 = new CommonButton();

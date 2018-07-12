@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.mapper.WeChatUserInfoMapper">
+    <select id="selectByOpenId" resultType="weChatUserInfo" parameterType="String">
+        SELECT * FROM wechatuser WHERE openid = #{openid}
+    </select>
+
+    <select id="insert" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
+     INSERT INTO wechatuser (subscribe, openid, nickname, sex, country,  province, city, language, headimgurl, subscribe_time,
+             unionid, remark, groupid, tagid, subscribe_scene, qr_scene, qr_scene_str, createdate, createtime,lastoperatedate,
+             lastoperatetime)
+        VALUES ( #{subscribe}, #{openid}, #{nickname}, #{sex}, #{country},#{province}, #{city}, #{language}, #{headimgurl}, #{subscribe_time},
+                #{unionid}, #{remark}, #{groupid},NULL, #{subscribe_scene},#{qr_scene}, #{qr_scene_str}, #{createdate},#{createtime},#{lastoperatedate},
+                #{lastoperatetime});
+    </select>
+
+    <select id="updateByOpenId" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
+        update wechatuser
+          set subscribe = #{subscribe,jdbcType=VARCHAR},
+              nickname = #{nickname,jdbcType=VARCHAR},
+              sex = #{sex,jdbcType=VARCHAR},
+              country = #{country,jdbcType=VARCHAR},
+              province = #{province,jdbcType=VARCHAR},
+              city = #{city,jdbcType=VARCHAR},
+              language = #{language,jdbcType=VARCHAR},
+              subscribe_time = #{subscribe_time,jdbcType=VARCHAR},
+              unionid = #{unionid,jdbcType=VARCHAR},
+              remark = #{remark,jdbcType=VARCHAR},
+              groupid = #{groupid,jdbcType=VARCHAR},
+              tagid = NULL,
+              subscribe_scene = #{subscribe_scene,jdbcType=VARCHAR},
+              qr_scene = #{qr_scene,jdbcType=VARCHAR},
+              qr_scene_str = #{qr_scene_str,jdbcType=VARCHAR},
+              createdate = #{createdate,jdbcType=VARCHAR},
+              createtime = #{createtime,jdbcType=VARCHAR},
+              lastname = #{lastname,jdbcType=VARCHAR},
+              telephone = #{telephone,jdbcType=VARCHAR},
+              unsubscribedate = #{unsubscribedate,jdbcType=VARCHAR},
+              unsubscribetime = #{unsubscribetime,jdbcType=VARCHAR},
+              lastoperatedate = #{lastoperatedate,jdbcType=VARCHAR},
+              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR}
+          where openid = #{openid}
+    </select>
+
+    <select id="unSubscribe" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
+        update wechatuser
+          set subscribe = #{subscribe,jdbcType=VARCHAR},
+              unsubscribedate = #{unsubscribedate,jdbcType=VARCHAR},
+              unsubscribetime = #{unsubscribetime,jdbcType=VARCHAR},
+              lastoperatedate = #{lastoperatedate,jdbcType=VARCHAR},
+              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR}
+           where openid = #{openid}
+    </select>
+
+</mapper>

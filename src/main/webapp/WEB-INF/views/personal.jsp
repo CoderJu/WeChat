@@ -47,10 +47,15 @@
     </div>
     <div class="weui-cell"></div>
     <div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
-</div>
+        <a class="weui-btn weui-btn_primary" href="javascript:submit()" id="showTooltips">确定</a>
+    </div>
 
-<script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="weui/js/jquery-weui.js"></script>
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <script src="weui/js/jquery-weui.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+    function submit(){
+        alert("111");
+    }
+</script>

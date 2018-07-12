@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.mapper.SNSUserInfoMapper">
+    <select id="selectSNSUserByOpenID" resultType="com.wechat.model.web.SNSUserInfo" parameterType="String">
+      SELECT * FROM snsuser WHERE 1=1
+        <if test="_parameter != null">
+            and openid = #{openid}
+        </if>
+    </select>
+    <select id="insert" parameterType="com.wechat.model.web.SNSUserInfo">
+    INSERT INTO  snsuser
+      ( openid, nickname, sex, country, province,
+       city, headimgurl, privilegeid, unionid, createdate,
+       createtime, lastoperatedate, lastoperatetime, lastname, telephone)
+       VALUES
+        (#{openid}, #{nickname}, #{sex}, #{country}, #{province},
+         #{city}, #{headimgurl}, NULL, #{unionid}, #{createdate},
+         #{createtime}, #{lastoperatedate}, #{lastoperatetime}, #{lastname}, #{telephone});
+    </select>
+    <select id="updateSNSUserByOpenId" parameterType="com.wechat.model.web.SNSUserInfo">
+      UPDATE snsuser
+        SET
+          nickname=#{nickname}, sex=#{sex}, country=#{country},
+          province=#{province}, city= #{city}, headimgurl=#{headimgurl}, privilegeid=NULL, unionid=#{unionid},
+          createdate=#{createdate}, createtime=#{createtime}, lastoperatedate=#{lastoperatedate}, lastoperatetime=#{lastoperatetime},
+          lastname=#{lastname},
+          telephone=#{telephone}
+        WHERE openid=#{openid}
+    </select>
+</mapper>

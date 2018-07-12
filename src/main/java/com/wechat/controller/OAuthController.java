@@ -2,9 +2,12 @@ package com.wechat.controller;
 
 import com.wechat.Util.AdvancedUtil;
 import com.wechat.Util.PropertyUtil;
+import com.wechat.Util.Util;
 import com.wechat.model.web.SNSUserInfo;
 import com.wechat.model.web.WeChatOauth2Token;
+import com.wechat.service.SNSUserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +30,14 @@ import java.io.IOException;
 public class OAuthController {
     private static Logger logger = Logger.getLogger(OAuthController.class);
 
+    @Autowired
+    private SNSUserService snsUserService;
+
     @RequestMapping(value = "/oauth",method = RequestMethod.GET)
     public String oauth(HttpServletRequest request, HttpServletResponse response,Model model) throws ServletException, IOException {
+        String returnStr = "";
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-
         // 用户同意授权后，能获取到code
         String code = request.getParameter("code");
         String state = request.getParameter("state");
@@ -50,15 +56,29 @@ public class OAuthController {
             // 获取用户信息
             if (AdvancedUtil.CheckAccessToken(weChatOauth2Token)) {//校验当前TOKEN是否有效
                 SNSUserInfo snsUserInfo = AdvancedUtil.getSNSUserInfo(accessToken, openId);
+                SNSUserInfo snsUserInfo_temp = snsUserService.selectSNSUserByOpenID(snsUserInfo.getOpenid());
+                snsUserInfo.setCreatedate(Util.getCurrentDate());
+                snsUserInfo.setCreatetime(Util.getCurrentTime());
+                snsUserInfo.setLastoperatedate(Util.getCurrentDate());
+                snsUserInfo.setLastoperatetime(Util.getCurrentTime());
+                if (snsUserInfo_temp == null){
+                    snsUserService.insert(snsUserInfo);
+                }else{
+                    snsUserService.updateSNSUserByOpenId(snsUserInfo);
+                }
                 // 设置要传递的参数
                 model.addAttribute("snsUserInfo", snsUserInfo);
                 model.addAttribute("state", state);
+                returnStr = "personal";
             }else{
                 model.addAttribute("errcode", "40003");
                 model.addAttribute("errmsg", "invalid openid");
+                returnStr = "error";
             }
         }
         // 跳转到show.jsp
-        return "show";
+        return returnStr;
     }
+
+
 }
