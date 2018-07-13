@@ -11,6 +11,7 @@ import java.util.List;
  * 版本：V1.0
  */
 public class WeChatUserInfo {
+    private Integer id;
     //用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。
     private String subscribe;
     //用户的标识，对当前公众号唯一
@@ -69,6 +70,24 @@ public class WeChatUserInfo {
     private String unsubscribedate;
     //取消关注时间
     private String unsubscribetime;
+    //用户是否补充个人信息
+    private Integer personal;
+
+    public Integer getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Integer personal) {
+        this.personal = personal;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getSubscribe() {
         return subscribe;

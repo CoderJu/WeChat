@@ -36,4 +36,12 @@ public interface WeChatUserInfoMapper {
      * @param weChatUserInfo
      */
     void unSubscribe(WeChatUserInfo weChatUserInfo);
+
+    /**
+     * 根据openid更新lastname和电话
+     * @param weChatUserInfo
+     */
+    void updateTelAndLastName(WeChatUserInfo weChatUserInfo);
+
+
 }

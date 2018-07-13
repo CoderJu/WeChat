@@ -8,10 +8,10 @@
     <select id="insert" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
      INSERT INTO wechatuser (subscribe, openid, nickname, sex, country,  province, city, language, headimgurl, subscribe_time,
              unionid, remark, groupid, tagid, subscribe_scene, qr_scene, qr_scene_str, createdate, createtime,lastoperatedate,
-             lastoperatetime)
+             lastoperatetime,personal)
         VALUES ( #{subscribe}, #{openid}, #{nickname}, #{sex}, #{country},#{province}, #{city}, #{language}, #{headimgurl}, #{subscribe_time},
                 #{unionid}, #{remark}, #{groupid},NULL, #{subscribe_scene},#{qr_scene}, #{qr_scene_str}, #{createdate},#{createtime},#{lastoperatedate},
-                #{lastoperatetime});
+                #{lastoperatetime},#{personal});
     </select>
 
     <select id="updateByOpenId" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
@@ -38,7 +38,8 @@
               unsubscribedate = #{unsubscribedate,jdbcType=VARCHAR},
               unsubscribetime = #{unsubscribetime,jdbcType=VARCHAR},
               lastoperatedate = #{lastoperatedate,jdbcType=VARCHAR},
-              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR}
+              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR},
+              personal = #{personal,jdbcType=INTEGER}
           where openid = #{openid}
     </select>
 
@@ -48,8 +49,19 @@
               unsubscribedate = #{unsubscribedate,jdbcType=VARCHAR},
               unsubscribetime = #{unsubscribetime,jdbcType=VARCHAR},
               lastoperatedate = #{lastoperatedate,jdbcType=VARCHAR},
-              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR}
+              lastoperatetime = #{lastoperatetime,jdbcType=VARCHAR},
+              lastname = #{lastname,jdbcType=VARCHAR},
+              telephone = #{telephone,jdbcType=VARCHAR},
+              personal = #{personal,jdbcType=INTEGER}
            where openid = #{openid}
+    </select>
+
+    <select id="updateTelAndLastName" parameterType="com.wechat.mapper.WeChatUserInfoMapper">
+        update wechatuser
+        set lastname = #{lastname,jdbcType=VARCHAR},
+        telephone = #{telephone,jdbcType=VARCHAR},
+        personal = #{personal,jdbcType=INTEGER}
+        where openid = #{openid}
     </select>
 
 </mapper>

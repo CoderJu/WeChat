@@ -29,4 +29,10 @@ public interface SNSUserInfoMapper {
      * @param snsUserInfo
      */
     void updateSNSUserByOpenId(SNSUserInfo snsUserInfo);
+
+    /**
+     * 根据OpenId更新用户姓名和电话
+     * @param snsUserInfo
+     */
+    void updateTelAndLastName(SNSUserInfo snsUserInfo);
 }

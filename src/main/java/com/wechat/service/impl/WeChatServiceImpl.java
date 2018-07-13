@@ -173,6 +173,7 @@ public class WeChatServiceImpl implements WeChatService {
              weChatUserInfo.setSubscribe_scene(jsonObject.getString("subscribe_scene"));
              weChatUserInfo.setQr_scene(jsonObject.getString("qr_scene"));
              weChatUserInfo.setQr_scene_str(jsonObject.getString("qr_scene_str"));
+             weChatUserInfo.setPersonal(0);
             }catch (Exception e){
                 if ("0".equals(weChatUserInfo.getSubscribe())){
                     logger.info("用户{}已取消关注"+weChatUserInfo.getOpenid()+"||"+weChatUserInfo.getNickname());
@@ -201,12 +202,14 @@ public class WeChatServiceImpl implements WeChatService {
             weChatUserInfo.setCreatetime(Util.getCurrentTime());
             weChatUserInfo.setLastoperatedate(Util.getCurrentDate());
             weChatUserInfo.setLastoperatetime(Util.getCurrentTime());
+            weChatUserInfo.setPersonal(0);//
             weChatUserInfoMapper.insert(weChatUserInfo);
         }else{//二次关注,更新数据库基础信息字段
             weChatUserInfo.setLastoperatedate(Util.getCurrentDate());
             weChatUserInfo.setLastoperatetime(Util.getCurrentTime());
             weChatUserInfo.setSubscribe("1");
             weChatUserInfoMapper.updateByOpenId(weChatUserInfo);
+            weChatUserInfo.setPersonal(0);
         }
 
     }
@@ -218,7 +221,21 @@ public class WeChatServiceImpl implements WeChatService {
         weChatUserInfo.setUnsubscribedate(Util.getCurrentDate());
         weChatUserInfo.setUnsubscribetime(Util.getCurrentTime());
         weChatUserInfo.setSubscribe("0");
+        weChatUserInfo.setTelephone("");
+        weChatUserInfo.setLastname("");
         weChatUserInfoMapper.unSubscribe(weChatUserInfo);
+    }
+
+    @Override
+    public void updateTelAndLastName(WeChatUserInfo weChatUserInfo) {
+        weChatUserInfoMapper.updateTelAndLastName(weChatUserInfo);
+    }
+
+    @Override
+    public WeChatUserInfo searchByOpenid(String openId) {
+        WeChatUserInfo weChatUserInfo = new WeChatUserInfo();
+        weChatUserInfo.setOpenid(openId);
+        return weChatUserInfoMapper.selectByOpenId(weChatUserInfo);
     }
 
 

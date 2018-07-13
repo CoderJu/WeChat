@@ -35,4 +35,9 @@ public class SNSUserServiceImpl implements SNSUserService {
     public void updateSNSUserByOpenId(SNSUserInfo snsUserInfo) {
         snsUserInfoMapper.updateSNSUserByOpenId(snsUserInfo);
     }
+
+    @Override
+    public void updateTelAndLastName(SNSUserInfo snsUserInfo) {
+        snsUserInfoMapper.updateTelAndLastName(snsUserInfo);
+    }
 }

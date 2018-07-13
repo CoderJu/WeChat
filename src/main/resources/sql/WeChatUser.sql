@@ -26,6 +26,7 @@ create table `wechatuser`(
    `unsubscribetime` VARCHAR(50) COMMENT '取消关注时间',
    `lastoperatedate` VARCHAR(100)   COMMENT '上次操作日期',
    `lastoperatetime` VARCHAR(50) COMMENT '上次操作时间',
+   `personal` INT COMMENT '是否已经补充个人信息',
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ALTER TABLE wechatuser COMMENT='关注用户信息表';

@@ -27,4 +27,12 @@
           telephone=#{telephone}
         WHERE openid=#{openid}
     </select>
+    <select id="updateTelAndLastName" parameterType="com.wechat.model.web.SNSUserInfo">
+        UPDATE snsuser
+        SET
+        lastname=#{lastname},
+        telephone=#{telephone}
+        WHERE openid=#{openid}
+    </select>
+
 </mapper>

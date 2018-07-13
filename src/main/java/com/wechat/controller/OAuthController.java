@@ -3,9 +3,11 @@ package com.wechat.controller;
 import com.wechat.Util.AdvancedUtil;
 import com.wechat.Util.PropertyUtil;
 import com.wechat.Util.Util;
+import com.wechat.model.user.WeChatUserInfo;
 import com.wechat.model.web.SNSUserInfo;
 import com.wechat.model.web.WeChatOauth2Token;
 import com.wechat.service.SNSUserService;
+import com.wechat.service.WeChatService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,9 @@ public class OAuthController {
     @Autowired
     private SNSUserService snsUserService;
 
+    @Autowired
+    private WeChatService weChatService;
+
     @RequestMapping(value = "/oauth",method = RequestMethod.GET)
     public String oauth(HttpServletRequest request, HttpServletResponse response,Model model) throws ServletException, IOException {
         String returnStr = "";
@@ -57,6 +62,7 @@ public class OAuthController {
             if (AdvancedUtil.CheckAccessToken(weChatOauth2Token)) {//校验当前TOKEN是否有效
                 SNSUserInfo snsUserInfo = AdvancedUtil.getSNSUserInfo(accessToken, openId);
                 SNSUserInfo snsUserInfo_temp = snsUserService.selectSNSUserByOpenID(snsUserInfo.getOpenid());
+                //System.out.print("=======ID"+snsUserInfo_temp.getId());
                 snsUserInfo.setCreatedate(Util.getCurrentDate());
                 snsUserInfo.setCreatetime(Util.getCurrentTime());
                 snsUserInfo.setLastoperatedate(Util.getCurrentDate());
@@ -66,10 +72,16 @@ public class OAuthController {
                 }else{
                     snsUserService.updateSNSUserByOpenId(snsUserInfo);
                 }
-                // 设置要传递的参数
-                model.addAttribute("snsUserInfo", snsUserInfo);
-                model.addAttribute("state", state);
-                returnStr = "personal";
+                WeChatUserInfo weChatUserInfo = weChatService.searchByOpenid(openId);
+                Integer personal = weChatUserInfo.getPersonal();
+                if (personal == 1){//已经补充个人信息直接跳转到图书目录
+                    returnStr = "index";
+                }else {
+                    // 设置要传递的参数
+                    model.addAttribute("snsUserInfo", snsUserInfo);
+                    model.addAttribute("state", state);
+                    returnStr = "personal";
+                }
             }else{
                 model.addAttribute("errcode", "40003");
                 model.addAttribute("errmsg", "invalid openid");

@@ -11,6 +11,7 @@ import java.util.List;
  * 版本：V1.0
  */
 public class SNSUserInfo {
+    private Integer id;
     //用户的唯一标识
     private String openid;
     //用户昵称
@@ -42,6 +43,14 @@ public class SNSUserInfo {
     private String lastoperatedate;
     //上次操作时间
     private String lastoperatetime;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getOpenid() {
         return openid;

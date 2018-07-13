@@ -41,4 +41,17 @@ public interface WeChatService {
       * @param weChatUserInfo
       */
      void unSubscribe(WeChatUserInfo weChatUserInfo);
+
+     /**
+      * 根据openid更新用户姓名和电话
+      * @param weChatUserInfo
+      */
+     void updateTelAndLastName(WeChatUserInfo weChatUserInfo);
+
+     /**
+      * 根据openid查找用户
+      * @param openId
+      * @return
+      */
+    WeChatUserInfo searchByOpenid(String openId);
 }
