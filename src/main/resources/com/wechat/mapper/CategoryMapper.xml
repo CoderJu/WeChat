@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.mapper.CategoryMapper">
+
+    <resultMap type="com.wechat.model.book.Category" id="categorys">
+        <result property="cid" column="cid"/>
+        <result property="cname" column="cname"/>
+        <result property="iconurl" column="iconurl"/>
+    </resultMap>
+
+    <select id="showAllCategory" resultMap="categorys" >
+        SELECT * FROM category
+    </select>
+
+
+</mapper>

@@ -74,8 +74,10 @@ public class OAuthController {
                 }
                 WeChatUserInfo weChatUserInfo = weChatService.searchByOpenid(openId);
                 Integer personal = weChatUserInfo.getPersonal();
+
                 if (personal == 1){//已经补充个人信息直接跳转到图书目录
-                    returnStr = "index";
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>showAllCategory:"+personal);
+                    returnStr = "forward:/showAllCategory";
                 }else {
                     // 设置要传递的参数
                     model.addAttribute("snsUserInfo", snsUserInfo);
