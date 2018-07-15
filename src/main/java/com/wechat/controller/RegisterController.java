@@ -46,6 +46,6 @@ public class RegisterController {
         weChatUserInfo.setPersonal(1);
         weChatService.updateTelAndLastName(weChatUserInfo);
         model.addAttribute("register","1");
-        return "redirect:/showAllCategory";
+        return "redirect:/msg";
     }
 }
