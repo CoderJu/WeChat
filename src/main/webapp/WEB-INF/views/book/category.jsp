@@ -31,7 +31,7 @@
 <div class="weui-grids">
 
     <c:forEach items="${categorys}" var="item" varStatus="status">
-        <a href="" class="weui-grid js_grid">
+        <a href="/searchBookByCategory?cid=${item.cid}" class="weui-grid js_grid">
             <div class="weui-grid__icon">
                 <img src="${item.iconurl}" alt="">
             </div>

@@ -32,6 +32,6 @@ public class CategoryController {
         List<Category> categorys = categoryService.showAllCategory();
         System.out.print("categorys>>>>"+categorys);
         model.addAttribute("categorys",categorys);
-        return "category/category";
+        return "book/category";
     }
 }
