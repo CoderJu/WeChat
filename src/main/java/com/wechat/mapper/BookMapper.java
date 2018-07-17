@@ -15,4 +15,6 @@ import java.util.List;
 public interface BookMapper {
 
     List<Book> searchBookByCategory(String cid) ;
+
+    List<Book> searchBookByName(Book book);
 }

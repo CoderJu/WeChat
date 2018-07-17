@@ -32,6 +32,20 @@ public class BookController {
     public String searchBookByCategory(@RequestParam(value="cid",required=true) String cid, Model model){
        List<Book> books =  bookService.searchBookByCategory(cid);
        model.addAttribute("books",books);
-        return "book/book";
+       model.addAttribute("cid",cid);
+       return "book/book";
+    }
+
+    @RequestMapping(value = "/searchBookByName")
+    public String searchBookByName(
+            @RequestParam(value="cid",required=true) String cid,
+            @RequestParam(value="searchInput",required=true) String bname, Model model){
+            Book book = new Book();
+            book.setCid(cid);
+            book.setBname(bname);
+            List<Book> books =  bookService.searchBookByName(book);
+            model.addAttribute("books",books);
+            model.addAttribute("cid",cid);
+            return "book/book";
     }
 }

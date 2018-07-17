@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface BookService {
     List<Book> searchBookByCategory(String cid);
+
+    List<Book> searchBookByName(Book book);
 }

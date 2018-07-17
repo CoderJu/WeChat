@@ -28,6 +28,7 @@
     <mvc:resources mapping="/jquery/**"  location="/WEB-INF/static/jquery/"/>
     <mvc:resources mapping="/weui/**"  location="/WEB-INF/static/weui/"/>
     <mvc:resources mapping="/images/**" location="/WEB-INF/static/image/"/>
+    <mvc:resources mapping="/icon/**" location="/WEB-INF/static/icon/"/>
 
 
 </beans>

@@ -6,7 +6,9 @@ import com.wechat.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,5 +27,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> searchBookByCategory(String cid) {
         return bookMapper.searchBookByCategory(cid);
+    }
+
+    @Override
+    public List<Book> searchBookByName(Book book) {
+        return bookMapper.searchBookByName(book);
     }
 }

@@ -18,5 +18,15 @@
         </if>
     </select>
 
+    <select id="searchBookByName" resultMap="books" resultType="com.wechat.model.book.Book" >
+        SELECT * FROM book where 1=1
+
+        <if test="#{cid} != null">
+            and cid = #{cid}
+        </if>
+        <if test="#{bname} != null">
+            and bname like '%${bname}%'
+        </if>
+    </select>
 
 </mapper>

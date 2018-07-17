@@ -7,9 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="weui/css/weui.min.css">
-<link rel="stylesheet" href="weui/css/weui.css">
-<link rel="stylesheet" href="weui/css/demos.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +24,27 @@
 
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
+    <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+
 </head>
 
 <body ontouchstart>
-
-<header class='demos-header'>
-    <h1 class="demos-title">图书列表</h1>
-</header>
 <div class="page__bd">
+    <div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form" action="/searchBookByName">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="hidden" name="cid" id="cid" value="${cid}"/>
+                <input type="search" class="weui-search-bar__input" id="searchInput" name="searchInput" placeholder="搜索" required="">
+                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+            </div>
+            <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                <i class="weui-icon-search"></i>
+                <span>搜索</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+    </div>
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__bd">
             <c:forEach items="${books}" var="item" varStatus="status">
@@ -45,18 +55,13 @@
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">${item.bname}</h4>
                         <p class="weui-media-box__desc">${item.bdesc}</p>
-                        <p class="weui-media-box__desc price_desc">${item.author}</p>
+                        <p class="weui-media-box__desc price_desc" style="color: red">${item.author}</p>
                     </div>
                 </a>
             </c:forEach>
         </div>
     </div>
 </div>
-<script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="weui/js/jquery-weui.js"></script>
-<script>
-
-</script>
 
 </body>
 
