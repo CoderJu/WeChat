@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class BookController {
        return "book/book";
     }
 
-    @RequestMapping(value = "/searchBookByName")
+    @RequestMapping(value = "/searchBookByName",method = RequestMethod.GET)
     public String searchBookByName(
             @RequestParam(value="cid",required=true) String cid,
             @RequestParam(value="searchInput",required=true) String bname, Model model){
@@ -47,5 +48,13 @@ public class BookController {
             model.addAttribute("books",books);
             model.addAttribute("cid",cid);
             return "book/book";
+    }
+
+    @RequestMapping(value = "/searchBookByBid" ,method = RequestMethod.GET)
+    public String searchBookByBid(@RequestParam(value = "bid",required = true) Integer bid ,Model model){
+        Book book = bookService.searchBookByBid(bid);
+        System.out.println(book);
+        model.addAttribute("book",book);
+        return "book/bookDetial";
     }
 }

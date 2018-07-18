@@ -33,4 +33,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> searchBookByName(Book book) {
         return bookMapper.searchBookByName(book);
     }
+
+    @Override
+    public Book searchBookByBid(Integer bid) {
+        return bookMapper.searchBookByBid(bid);
+    }
 }

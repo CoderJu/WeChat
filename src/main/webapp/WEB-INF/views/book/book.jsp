@@ -48,7 +48,7 @@
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__bd">
             <c:forEach items="${books}" var="item" varStatus="status">
-                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <a href="/searchBookByBid?bid=${item.bid}" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
                         <img class="weui-media-box__thumb" src="${item.imageurl}" alt="">
                     </div>
