@@ -1,6 +1,7 @@
 package com.wechat.controller;
 
 import com.wechat.model.book.Book;
+import com.wechat.model.book.Category;
 import com.wechat.service.BookService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/searchBookByCategory")
+    @RequestMapping(value = "/searchBookByCategory",method = RequestMethod.GET)
     public String searchBookByCategory(@RequestParam(value="cid",required=true) String cid, Model model){
        List<Book> books =  bookService.searchBookByCategory(cid);
        model.addAttribute("books",books);
@@ -39,11 +40,13 @@ public class BookController {
 
     @RequestMapping(value = "/searchBookByName",method = RequestMethod.GET)
     public String searchBookByName(
-            @RequestParam(value="cid",required=true) String cid,
+            @RequestParam(value="cid",required=true) Integer cid,
             @RequestParam(value="searchInput",required=true) String bname, Model model){
             Book book = new Book();
-            book.setCid(cid);
             book.setBname(bname);
+            Category category = new Category();
+            category.setCid(cid);
+            book.setCategory(category);
             List<Book> books =  bookService.searchBookByName(book);
             model.addAttribute("books",books);
             model.addAttribute("cid",cid);
@@ -53,8 +56,19 @@ public class BookController {
     @RequestMapping(value = "/searchBookByBid" ,method = RequestMethod.GET)
     public String searchBookByBid(@RequestParam(value = "bid",required = true) Integer bid ,Model model){
         Book book = bookService.searchBookByBid(bid);
-        System.out.println(book);
         model.addAttribute("book",book);
         return "book/bookDetial";
     }
+
+    @RequestMapping(value = "/borrow" ,method = RequestMethod.GET)
+    public String borrow(@RequestParam(value = "openid",required = true) String openid ,
+                         @RequestParam(value = "bid",required = true) Integer bid ,
+                         Model model){
+        Book book = bookService.searchBookByBid(bid);
+        //System.out.println("openid>>>>"+openid+"||bid:"+bid);
+         model.addAttribute("book",book);
+         model.addAttribute("openid",openid);
+         return "book/bookBorrow";
+    }
+
 }

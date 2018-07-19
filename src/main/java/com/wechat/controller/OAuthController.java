@@ -74,7 +74,7 @@ public class OAuthController {
                 }
                 WeChatUserInfo weChatUserInfo = weChatService.searchByOpenid(openId);
                 Integer personal = weChatUserInfo.getPersonal();
-
+                request.getSession().setAttribute("user",weChatUserInfo);
                 if (personal == 1){//已经补充个人信息直接跳转到图书目录
                     System.out.println(">>>>>>>>>>>>>>>>>>>>showAllCategory:"+personal);
                     returnStr = "forward:/showAllCategory";

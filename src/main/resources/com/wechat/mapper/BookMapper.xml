@@ -7,30 +7,42 @@
         <result property="imageurl" column="imageurl"/>
         <result property="bdesc" column="bdesc"/>
         <result property="author" column="author"/>
-         <result property="cid" column="cid"/>
+        <result property="number" column="number"/>
+        <association property="category" javaType="category">
+            <id column="cid" property="cid"/>
+            <result column="cname" property="cname"/>
+            <result column="iconurl" property="iconurl"/>
+        </association>
     </resultMap>
+
     <select id="searchBookByCategory" resultMap="books"  parameterType="Integer">
-        SELECT * FROM book where 1=1
+        select t.*,t2.cname,t2.iconurl
+        from book t,category t2
+        where t.cid=t2.cid
         <if test="_parameter != null">
-            and cid = #{cid}
+            and t.cid = #{cid}
         </if>
     </select>
+
 
     <select id="searchBookByName" resultMap="books" resultType="com.wechat.model.book.Book" >
-        SELECT * FROM book where 1=1
-
-        <if test="#{cid} != null">
-            and cid = #{cid}
+        select t.*,t2.cname,t2.iconurl
+        from book t,category t2
+        where t.cid=t2.cid
+        <if test="#{category.cid} != null">
+            and t.cid = #{category.cid}
         </if>
         <if test="#{bname} != null">
-            and bname like '%${bname}%'
+            and t.bname like '%${bname}%'
         </if>
     </select>
-    <select id="searchBookByBid" resultType="com.wechat.model.book.Book" parameterType="Integer" >
-        SELECT * FROM book where 1=1
 
+    <select id="searchBookByBid" resultMap="books" parameterType="Integer" >
+        select t.*,t2.cname,t2.iconurl
+        from book t,category t2
+        where t.cid=t2.cid
         <if test="_parameter != null">
-            and bid = #{bid}
+            and t.bid = #{bid}
         </if>
     </select>
 

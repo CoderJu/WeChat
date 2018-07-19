@@ -30,7 +30,7 @@ public class CategoryController {
     @RequestMapping(value = "/showAllCategory" ,method = RequestMethod.GET)
     public String showAllCategory(Model model){
         List<Category> categorys = categoryService.showAllCategory();
-        System.out.print("categorys>>>>"+categorys);
+        //System.out.print("categorys>>>>"+categorys);
         model.addAttribute("categorys",categorys);
         return "book/category";
     }

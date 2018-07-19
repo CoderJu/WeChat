@@ -20,7 +20,10 @@ public class Book {
 
     private String author;
 
-    private  String cid;
+    //private String cid;
+    private Category category;
+
+    private Integer number;
 
     public Integer getBid() {
         return bid;
@@ -62,12 +65,20 @@ public class Book {
         this.author = author;
     }
 
-    public String getCid() {
-        return cid;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     @Override
@@ -78,7 +89,8 @@ public class Book {
                 ", imageurl='" + imageurl + '\'' +
                 ", bdesc='" + bdesc + '\'' +
                 ", author='" + author + '\'' +
-                ", cid='" + cid + '\'' +
+                ", category=" + category +
+                ", number=" + number +
                 '}';
     }
 }

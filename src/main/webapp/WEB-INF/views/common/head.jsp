@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="weui/css/demos.css">
 <link rel="stylesheet" href="weui/css/jquery-weui.css">
 <link rel="stylesheet" href="weui/css/jquery-weui.min.css">
+<script src="jquery/jquery-2.1.4.js"></script>
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/jquery.min.js"></script>
 <script src="weui/js/jquery-weui.js"></script>
 <script src="weui/js/fastclick.js"></script>
-<script src="jquery/jquery-2.1.4.js"></script>

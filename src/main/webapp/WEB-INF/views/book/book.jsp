@@ -55,7 +55,7 @@
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">${item.bname}</h4>
                         <p class="weui-media-box__desc">${item.bdesc}</p>
-                        <p class="weui-media-box__desc price_desc" style="color: red">${item.author}</p>
+                        <p class="weui-media-box__desc price_desc" style="color:green">${item.author}</p>
                     </div>
                 </a>
             </c:forEach>
